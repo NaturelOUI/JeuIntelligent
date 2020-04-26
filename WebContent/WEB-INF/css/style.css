@@ -1,8 +1,6 @@
 @charset "UTF-8";
 
 body {
-	/*background-image: url("plateau.png");
-	background-repeat: no-repeat;*/
 	background-position: top;
 	background-color: Gainsboro;
 	margin: 0;
@@ -14,14 +12,7 @@ table{
 	width: 100%;
 	margin: auto;
 	}
-td {
-   /*border: 2px solid;  auront une bordure de 2px 
-    width: 8em;
-    height: 6em;
-    align-content: center;
-    color: DarkCyan;
-*/
-}
+
 #td1 {
 	border: 1px solid; 
     width: 20%;
@@ -69,6 +60,7 @@ img {
   width: 100%;
 }
 
+
 .tdPlateau {
    	border: 1px solid red; 
    	width: 14%;
@@ -82,4 +74,139 @@ img {
 	height: 10px;
 	overflow:hidden;
 }
+.divTd{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-content: flex-end;
+	
+}
 
+.cercle1 {
+
+ 	 border-radius:50%;
+ 	 background:#000000;
+ 	 width:21%;
+  	 height:18%;
+ 	 border:1px solid #000000;
+ 	 visibility: hidden;
+}
+.cercle2 {
+ 	 border-radius:50%;
+ 	 background:#0000ff;
+ 	 width:21%;
+  	 height:18%;
+ 	 border:1px solid #000000;
+ 	 visibility: hidden;
+}
+.cercle3 {
+ 	 border-radius:50%;
+ 	 background:#00ff00;
+ 	 width:21%;
+  	 height:18%;
+ 	 border:1px solid #000000;
+ 	 visibility: hidden;
+}
+
+.cercle4 {
+ 	 border-radius:50%;
+ 	 background:#00ffff;
+ 	 width:21%;
+  	 height:18%;
+ 	 border:1px solid #000000;
+ 	 visibility: hidden;
+}
+.cercle5 {
+ 	 border-radius:50%;
+ 	 background:#ff0000;
+ 	 width:21%;
+  	 height:18%;
+ 	 border:1px solid #000000;
+ 	 visibility: hidden;
+}
+.cercle6 {
+ 	 border-radius:50%;
+ 	 background:#ff00ff;
+ 	 width:21%;
+  	 height:18%;
+ 	 border:1px solid #000000;
+ 	 visibility: hidden;
+}
+.cercle7 {
+
+ 	 border-radius:50%;
+ 	 background:#ffff00;
+ 	 width:21%;
+  	 height:18%;
+ 	 border:1px solid #000000;
+ 	 visibility: hidden;
+}
+.cercle8 {
+ 	 border-radius:50%;
+ 	 background:#ffffff;
+ 	 width:21%;
+  	 height:18%;
+ 	 border:1px solid #000000;
+ 	 visibility: hidden;
+}
+.cercle9 {
+ 	 border-radius:50%;
+ 	 background:#777777;
+ 	 width:21%;
+  	 height:18%;
+ 	 border:1px solid #000000;
+ 	 visibility: hidden;
+}
+
+.cercle10 {
+ 	 border-radius:50%;
+ 	 background:#ff7f00;
+ 	 width:21%;
+  	 height:18%;
+ 	 border:1px solid #000000;
+ 	 visibility: hidden;
+}
+.cercle11 {
+ 	 border-radius:50%;
+ 	 background:#096a09;
+ 	 width:21%;
+  	 height:18%;
+ 	 border:1px solid #000000;
+ 	 visibility: hidden;
+}
+.cercle12 {
+ 	 border-radius:50%;
+ 	 background:#582900;
+ 	 width:21%;
+  	 height:18%;
+ 	 border:1px solid #000000;
+ 	 visibility: hidden;
+}
+
+#divDes{
+	width: 100%;
+	height: 100%;
+	display:flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-content: center;
+	align-items: center;
+	
+}
+#des{
+	font-size: 3em;
+}
+
+
+.joueur {
+	display:flex;
+}
+.txtEdit{
+	width: 50%;
+}
+pre{
+	height: 0;
+}
