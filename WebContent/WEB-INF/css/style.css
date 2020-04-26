@@ -1,0 +1,85 @@
+@charset "UTF-8";
+
+body {
+	/*background-image: url("plateau.png");
+	background-repeat: no-repeat;*/
+	background-position: top;
+	background-color: Gainsboro;
+	margin: 0;
+    padding: 0;
+
+	}
+table{
+	border-collapse: collapse;
+	width: 100%;
+	margin: auto;
+	}
+td {
+   /*border: 2px solid;  auront une bordure de 2px 
+    width: 8em;
+    height: 6em;
+    align-content: center;
+    color: DarkCyan;
+*/
+}
+#td1 {
+	border: 1px solid; 
+    width: 20%;
+
+    color: DarkCyan;
+}
+#td2 {
+	border: 1px solid; 
+	
+    align-content: center;
+    color: DarkCyan;
+}
+#td3 {
+	border: 1px solid; 
+	
+	width: 20%;
+
+    color: DarkCyan;
+}
+.erreur {
+	color: red;
+}
+
+
+
+
+/* Container holding the image and the text */
+.container {
+  position: relative;
+  text-align: center;
+  color: red;
+}
+
+
+
+img {
+  width: 100%;
+  display: block;
+}
+.divPlateau {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+
+.tdPlateau {
+   	border: 1px solid red; 
+   	width: 14%;
+}
+#divPlateau {
+
+ 
+}
+#case2 {
+	
+	height: 10px;
+	overflow:hidden;
+}
+
