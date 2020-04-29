@@ -1,10 +1,10 @@
 
-console.log('fichier JS charge');
+console.log('fichier JS charge.........');
 function adjustDivHeight(time){
 	setTimeout(() => { 
-		console.log("World!"); 
+		
 		var hgtImg = document.getElementById('imgPlateau').clientHeight;
-		console.log(hgtImg);
+		//console.log(hgtImg);
 	
 		
 		var tds = document.getElementsByClassName("divTd");
@@ -16,6 +16,7 @@ function adjustDivHeight(time){
 				
 			}
 	}, time);
+
 	
 }
 function LancerDes(){

@@ -203,6 +203,8 @@ img {
 
 .joueur {
 	display:flex;
+	font-size: 14px;
+	visibility: hidden;
 }
 .txtEdit{
 	width: 50%;

@@ -8,7 +8,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>Accueil</servlet-name>
-    <url-pattern>/</url-pattern>
+    <url-pattern>/accueil</url-pattern>
   </servlet-mapping>
   
   <servlet>
@@ -19,7 +19,14 @@
     <servlet-name>LoadImage</servlet-name>
     <url-pattern>/plateau.png</url-pattern>
   </servlet-mapping>
-  
+  <servlet>
+    <servlet-name>LoadJs</servlet-name>
+    <servlet-class>fr.ji.servlets.LoadJs</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoadJs</servlet-name>
+    <url-pattern>/loadJs</url-pattern>
+  </servlet-mapping>
   
   <jsp-config>
   	<jsp-property-group>
