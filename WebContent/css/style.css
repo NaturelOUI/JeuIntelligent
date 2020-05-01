@@ -204,10 +204,12 @@ img {
 .joueur {
 	display:flex;
 	font-size: 14px;
-	visibility: hidden;
+	justify-content: space-around;
+	/*visibility: hidden;*/
 }
 .txtEdit{
-	width: 50%;
+	/*width: 50%;*/
+	background-color: white;
 }
 pre{
 	height: 0;

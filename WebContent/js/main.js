@@ -1,2 +1,2 @@
 
-let partie = new Partie(NB_JOUEUR);
+let partie = new Partie(3);

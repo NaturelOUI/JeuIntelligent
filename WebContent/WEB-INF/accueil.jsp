@@ -10,14 +10,12 @@
 	
     <link rel="stylesheet" href="<c:url value="css/style.css"/>"/>
     
-	<script type="text/javascript" src="<c:url value="js/fct.js" />"></script>
-	<script type="text/javascript" src="<c:url value="js/Partie.js" />"></script>
-	<script type="text/javascript" src="<c:url value="js/Joueur.js" />"></script>
+	
 
 	
     <title>Bienvenue ! </title>
   </head>
-  <body onresize="adjustDivHeight(0)" >
+  <body onresize="Page.adjustDivHeight(0)" >
     <%--
       <%@ include file="Bandeau/bandeau.jsp" %>
       
@@ -27,14 +25,15 @@
         <tr>
           <td id="td1">
             <div id="joueurListe">
+            <%--
               <div id="joueur1" class="joueur">
                 <button id="btcache1" onclick="cacher(this.id)">X</button>
                 Joueur 1 :
-                <pre> </pre>
                 <div class="txtEdit" id="nomJ1" contenteditable="true">
                   joueur 1
                 </div>
               </div>
+              
               <div id="joueur2" class="joueur">
                 <button id="btcache2" onclick="cacher(this.id)">X</button>
                 Joueur 2 :
@@ -51,6 +50,7 @@
                   joueur 3
                 </div>
               </div>
+              
               <div id="joueur4" class="joueur">
                 <button id="btcache4" onclick="cacher(this.id)">X</button>
                 Joueur 4 :
@@ -123,14 +123,18 @@
                   joueur 12
                 </div>
               </div>
+              --%>
               <div id="ajouterJoueur">
-                <button id="btAjouterJoueur" onclick="ajouterJoueur">+</button>
+                <button id="btAjouterJoueur" onclick="Page.addPlayer()">+</button>
               </div>
+            </div>
+            <div>
+            	<button id="btLancerPartie" onclick="Page.LancerPartie()">Lancer la partie</button>
             </div>
           </td>
           <td id="td2">
             <div id="idContainer" class="container">
-              <img id="imgPlateau" src="plateau.png"> 
+              <img id="imgPlateau" src="<c:url value="resources/JeuIntelligent.png" />"> 
               <div class="divPlateau">
                 <table id="plateau">
                   <%--__________________________________________________________
@@ -676,15 +680,19 @@
           </td>
           <td id="td3">
             <div id="divDes">
-              <button onclick="LancerDes()">Lancer le dé</button>
-              <p id="des" onclick="LancerDes()"></p>
+              <button onclick="Page.LancerDes()">Lancer le dé</button>
+              <p id="des"></p>
             </div>
           </td>
         </tr>
       </table>
     </div>
-	<script type="text/javascript" src="<c:url value="js/initialize.js"/>"></script>
+	<%--<script type="text/javascript" src="js/initialize.js"></script>
 	<script type="text/javascript" src="<c:url value="js/main.js"/>"></script>
-
+	<script type="text/javascript" src="<c:url value="js/fct.js" />"></script>
+	--%>
+	<script type="text/javascript" src="<c:url value="js/Partie.js" />"></script>
+	<script type="text/javascript" src="<c:url value="js/Joueur.js" />"></script>
+	<script type="text/javascript" src="<c:url value="js/Page.js" />"></script>
   </body>
 </html>

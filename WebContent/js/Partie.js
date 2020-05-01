@@ -2,11 +2,14 @@ console.log("chargement Partie");
 
 class Partie {
 	 
-  constructor(nbJoueur) {
-    console.log("on entre dans le constructor");
-    this.nbJoueur = nbJoueur ; 
-    console.log("nombre de joueur = " + this.nbJoueur);
-    
+  constructor(NB_JOUEUR) {
+    this.NB = NB_JOUEUR;
+	console.log(this.NB = NB_JOUEUR);
+	this.cpt = 0 ;
   }
+	incremente(des){
+		console.log("le dé a fait : " + des);
+		this.cpt++;
+	}
 }
 
