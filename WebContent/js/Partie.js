@@ -25,8 +25,9 @@ class Partie {
 			
 			console.log(this.joueurs[this.aQuiLeTour].name +" a fait : " + des);
 			
-			Page.moveJeton(this.joueurs[this.aQuiLeTour],des)
-			this.joueurs[this.aQuiLeTour].pos += des;			
+			//Page.moveJeton(this.joueurs[this.aQuiLeTour],des)
+			this.joueurs[this.aQuiLeTour].bouge(des);
+			//this.joueurs[this.aQuiLeTour].pos += des;			
 			Page.ecrire(this.joueurs[this.aQuiLeTour].name +" a fait : " + des);
 			
 			// que doit il faire : 
@@ -60,10 +61,21 @@ class Partie {
 	}
 	regle7(joueur){}
 	regle8(joueur){}
-	regle9(joueur){}
+	regle9(joueur){
+		joueur.bouge(-7);
+		this.regle2(joueur);
+		
+	}
 	regle10(joueur){}
 	regle11(joueur){}
-	regle12(joueur){}
+	regle12(joueur){
+		for (let i = 0 ; i < NB_JOUEUR ; i++){
+			if (this.joueurs[i].pos > 0 ){
+				this.joueurs[i].bouge(-1);
+				this.regle(this.joueurs[i].pos, this.joueurs[i]);
+			}
+		}
+	}
 	regle13(joueur){}
 	regle14(joueur){}
 	regle15(joueur){}
@@ -79,7 +91,10 @@ class Partie {
 	regle18(joueur){}
 	regle19(joueur){}
 	regle20(joueur){}
-	regle21(joueur){}
+	regle21(joueur){
+		joueur.bouge(-10)
+		this.regle11(joueur);
+	}
 	regle22(joueur){}
 	regle23(joueur){
 		var max = this.joueurs[0].pos;
@@ -101,7 +116,11 @@ class Partie {
 	regle26(joueur){}
 	regle27(joueur){}
 	regle28(joueur){}
-	regle29(joueur){}
+	regle29(joueur){
+		joueur.bouge(-8);
+		joueur.boit(1);
+		this.regle21(joueur);
+	}
 	regle30(joueur){}
 
 	regle(numRegle,joueur){

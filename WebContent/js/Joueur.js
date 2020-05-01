@@ -39,4 +39,9 @@ class Joueur {
 		this.gorgee +=x;
 		Page.afficheGorgee(this);
 	}
+	bouge(x){
+		Page.moveJeton(this,x);
+		this.pos += x; 
+		
+	}
 }

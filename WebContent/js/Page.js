@@ -13,7 +13,15 @@ class Page {
 		 
 		
 	  }
-	
+	static lancerDes(){
+		var alea = Math.floor(Math.random() * 6) +1 ;
+		//var alea = 21 ;
+		//console.log(alea);
+		document.getElementById("des").textContent = alea;
+		if (PARTIESTARTED){
+			this.partie.incremente(alea);
+		}
+	}
 	static decalerBoutonPlus(){
 		//console.log("decalage du bouton + ");
 		let boutonPlus = document.getElementById("ajouterJoueur");
@@ -97,17 +105,7 @@ class Page {
 		}, time);
 
 	}
-	static lancerDes(){
-		var alea = Math.floor(Math.random() * 6) +1 ;
-		//var alea = 1 ;
-		//console.log(alea);
-		document.getElementById("des").textContent = alea;
 		
-		if (PARTIESTARTED){
-			this.partie.incremente(alea);
-		}
-	
-	}	
 	static lancerPartie(){
 		this.partie = new Partie(NB_JOUEUR)
 		PARTIESTARTED = true ; 
