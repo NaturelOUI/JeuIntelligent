@@ -5,7 +5,7 @@ class Page {
 		Page.adjustDivHeight(1000);
 		
 	    this.nbJoueur = nbJoueur ;
-	    console.log("nombre de joueur = " + this.nbJoueur);
+	    //console.log("nombre de joueur = " + this.nbJoueur);
 	    for (let i = 0 ; i< nbJoueur ; i++){
 			Page.addPlayer();
 		}
@@ -15,7 +15,7 @@ class Page {
 	  }
 	
 	static decalerBoutonPlus(){
-		console.log("decalage du bouton + ");
+		//console.log("decalage du bouton + ");
 		let boutonPlus = document.getElementById("ajouterJoueur");
 		//console.log(boutonPlus);
 		// remove button by id (bec worries about 2 items with same id)
@@ -39,6 +39,10 @@ class Page {
 			
 			var bouton = document.getElementById("btHide"+i);
 			bouton.setAttribute("id","btHide"+(i-1));
+			
+			var jeton = joueurHtml.getElementsByClassName("cercle" + i)[0];
+			
+			jeton.setAttribute("class","cercle"+(i-1));
 			
 		}
 		NB_JOUEUR -= 1 ;
@@ -71,6 +75,13 @@ class Page {
 		nomJoueur.setAttribute("contenteditable", "true");
 		nomJoueur.innerHTML = "joueur" + NB_JOUEUR;
 		joueurHtml.appendChild(nomJoueur);
+		
+		var jeton = document.createElement('div'); // is a node
+		jeton.setAttribute("class", "cercle" + NB_JOUEUR);
+		jeton.style.visibility = "visible";
+		jeton.style.height = "10px";
+		jeton.style.width = "12px";
+		joueurHtml.appendChild(jeton);
 		joueurList.appendChild(joueurHtml);
 		
 		//move the remove button at the end  
@@ -86,8 +97,9 @@ class Page {
 		}, time);
 
 	}
-	static LancerDes(){
+	static lancerDes(){
 		var alea = Math.floor(Math.random() * 6) +1 ;
+		//var alea = 1 ;
 		//console.log(alea);
 		document.getElementById("des").textContent = alea;
 		
@@ -96,7 +108,7 @@ class Page {
 		}
 	
 	}	
-	static LancerPartie(){
+	static lancerPartie(){
 		this.partie = new Partie(NB_JOUEUR)
 		PARTIESTARTED = true ; 
 		
@@ -104,6 +116,12 @@ class Page {
 			document.getElementById("btHide"+i).remove();
 			var nomJoueur= document.getElementById("nomJ"+i);
 			nomJoueur.setAttribute("contenteditable", "false");
+			var compteurGorgee = document.createElement("div");
+			compteurGorgee.setAttribute("class", "cptGorgee");
+			compteurGorgee.innerHTML = 0 ; 
+			var joueurHtml = document.getElementById("joueur"+i);
+			joueurHtml.appendChild(compteurGorgee);
+			
 		}
 		document.getElementById("ajouterJoueur").remove();
 		document.getElementById("btLancerPartie").remove();
@@ -111,8 +129,45 @@ class Page {
 		
 	}
 	
+	static moveJeton(joueur, combien){
+		var cercle1 = document.getElementById("case" + joueur.pos).getElementsByClassName("cercle" + (joueur.num +1))[0];
+		cercle1.style.visibility = "hidden";
+		var cercle2 = document.getElementById("case" + (joueur.pos + combien)).getElementsByClassName("cercle" + (joueur.num +1))[0];
+		cercle2.style.visibility = "visible";
+		//console.log("move");
+	}
+	static getName(joueur){
+		var nomJoueur = document.getElementById("nomJ"+(joueur.num +1));	
+			return nomJoueur.innerHTML;
+	}
+	static ecrire(text){
+		var bulletPoint = document.createElement('li'); // is a node
+		bulletPoint.innerHTML = text;
+		document.getElementById("CadreBas").appendChild(bulletPoint);
+	}
+	static afficheGorgee(joueur){
+		var joueurHtml = document.getElementById("joueur"+(joueur.num +1));		
+		var cptGorgee = joueurHtml.getElementsByClassName("cptGorgee")[0];
+		cptGorgee.innerHTML = joueur.gorgee;
+		
+		
+		
+	}
 }
 
 var NB_JOUEUR = 0;
 var PARTIESTARTED = false;
+var COLOR = [
+	"#000000",
+	"#0000ff",
+	"#00ff00",
+	"#00ffff",
+	"#ff0000",
+	"#ff00ff",
+	"#ffff00",
+	"#ffffff",
+	"#777777",
+	"#ff7f00",
+	"#096a09",
+	"#582900"];
 let page = new Page(3);

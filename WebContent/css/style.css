@@ -211,6 +211,8 @@ img {
 	/*width: 50%;*/
 	background-color: white;
 }
-pre{
-	height: 0;
+
+#CadreBas{
+	display:flex;
+	flex-direction: column-reverse;
 }

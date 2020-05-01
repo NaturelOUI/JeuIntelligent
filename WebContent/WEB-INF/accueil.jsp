@@ -129,7 +129,7 @@
               </div>
             </div>
             <div>
-            	<button id="btLancerPartie" onclick="Page.LancerPartie()">Lancer la partie</button>
+            	<button id="btLancerPartie" onclick="Page.lancerPartie()">Lancer la partie</button>
             </div>
           </td>
           <td id="td2">
@@ -680,17 +680,18 @@
           </td>
           <td id="td3">
             <div id="divDes">
-              <button onclick="Page.LancerDes()">Lancer le dé</button>
+              <button onclick="Page.lancerDes()">Lancer le dé</button>
               <p id="des"></p>
             </div>
           </td>
         </tr>
       </table>
     </div>
-	<%--<script type="text/javascript" src="js/initialize.js"></script>
-	<script type="text/javascript" src="<c:url value="js/main.js"/>"></script>
-	<script type="text/javascript" src="<c:url value="js/fct.js" />"></script>
-	--%>
+	<div id="CadreBas">
+		<ul>
+			
+		</ul>
+	</div>
 	<script type="text/javascript" src="<c:url value="js/Partie.js" />"></script>
 	<script type="text/javascript" src="<c:url value="js/Joueur.js" />"></script>
 	<script type="text/javascript" src="<c:url value="js/Page.js" />"></script>
