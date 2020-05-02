@@ -3,7 +3,6 @@ class Page {
 	constructor(nbJoueur) {		
 		console.log("ajustement de la taille du plateau en cours")
 		Page.adjustDivHeight(1000);
-		
 	    this.nbJoueur = nbJoueur ;
 	    //console.log("nombre de joueur = " + this.nbJoueur);
 	    for (let i = 0 ; i< nbJoueur ; i++){
@@ -13,9 +12,9 @@ class Page {
 		 
 		
 	  }
-	static lancerDes(){
-		var alea = Math.floor(Math.random() * 6) +1 ;
-		//var alea = 21 ;
+	lancerDes(){
+		//var alea = Math.floor(Math.random() * 6) +1 ;
+		var alea = 20;
 		//console.log(alea);
 		document.getElementById("des").textContent = alea;
 		if (PARTIESTARTED){
@@ -38,7 +37,6 @@ class Page {
 		
 		//decalage des autre joueurs
 		for (let i = parseInt(num)+1 ; i <= NB_JOUEUR; i++){
-			console.log(i);
 			var joueurHtml = document.getElementById("joueur"+i);	
 			joueurHtml.setAttribute("id","joueur"+(i-1));
 			
@@ -106,10 +104,11 @@ class Page {
 
 	}
 		
-	static lancerPartie(){
+	lancerPartie(){
 		this.partie = new Partie(NB_JOUEUR)
 		PARTIESTARTED = true ; 
-		
+		console.log("lancer partie");
+
 		for (let i = 1 ; i<= NB_JOUEUR; i++) {
 			document.getElementById("btHide"+i).remove();
 			var nomJoueur= document.getElementById("nomJ"+i);
@@ -132,7 +131,7 @@ class Page {
 		cercle1.style.visibility = "hidden";
 		var cercle2 = document.getElementById("case" + (joueur.pos + combien)).getElementsByClassName("cercle" + (joueur.num +1))[0];
 		cercle2.style.visibility = "visible";
-		//console.log("move");
+		
 	}
 	static getName(joueur){
 		var nomJoueur = document.getElementById("nomJ"+(joueur.num +1));	
@@ -150,6 +149,36 @@ class Page {
 		
 		
 		
+	}
+	static afficheChoix(joueur, question, choixListe){
+		const nb = choixListe.length;
+		var bulletPointChoix = document.createElement('li'); // is a node
+		bulletPointChoix.setAttribute("id","reponse");
+		for (let i = 0 ; i < nb ; i++){
+			var choixX = document.createElement('button'); // is a node
+			choixX.setAttribute("onclick","page.transmitChoice("+ joueur.num +", "+i+")");
+			choixX.innerHTML = choixListe[i];
+			bulletPointChoix.appendChild(choixX);
+		}
+		document.getElementById("CadreBas").appendChild(bulletPointChoix);
+		var bulletPointQuestion = document.createElement('li'); // is a node
+		bulletPointQuestion.setAttribute("id","question");
+		bulletPointQuestion.innerHTML = question;
+		document.getElementById("CadreBas").appendChild(bulletPointQuestion);
+		
+	}
+	transmitChoice(numJoueur ,choice){
+		
+		this.partie.recupChoix(numJoueur, choice);
+		document.getElementById("question").remove();
+		document.getElementById("reponse").remove();
+	}
+	
+	static cacherLeDe(){
+		document.getElementById("btDes").style.visibility = "hidden";
+	}
+	static afficherLeDe(){
+		document.getElementById("btDes").style.visibility = "visible";
 	}
 }
 

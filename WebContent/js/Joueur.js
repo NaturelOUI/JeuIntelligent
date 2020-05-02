@@ -6,6 +6,7 @@ class Joueur {
 	name;
 	pos;
 	gorgee;
+	genre;
 	
 	constructor(i){
 		this.num = i ; 
@@ -13,6 +14,7 @@ class Joueur {
 		this.name = Page.getName(this)
 		this.pos = 0 ; 
 		this.gorgee = 0;
+		this.genre = 0;
 	}
 	get num() { 
          return this.num; 
@@ -26,12 +28,17 @@ class Joueur {
 	get gorgee() { 
          return this.gorgee; 
     }
-
+	get genre() { 
+         return this.genre; 
+    }
 	set pos(newPos) { 
          this.pos = newPos;
     }
 	set gorgee(x) { 
          this.gorgee = x;
+    }
+	set genre(x) { 
+         this.genre = x;
     }
 
 	boit(x){

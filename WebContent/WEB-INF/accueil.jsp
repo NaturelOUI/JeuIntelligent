@@ -129,7 +129,7 @@
               </div>
             </div>
             <div>
-            	<button id="btLancerPartie" onclick="Page.lancerPartie()">Lancer la partie</button>
+            	<button id="btLancerPartie" onclick="page.lancerPartie()">Lancer la partie</button>
             </div>
           </td>
           <td id="td2">
@@ -680,7 +680,7 @@
           </td>
           <td id="td3">
             <div id="divDes">
-              <button onclick="Page.lancerDes()">Lancer le dé</button>
+              <button id="btDes" onclick="page.lancerDes()">Lancer le dé</button>
               <p id="des"></p>
             </div>
           </td>
