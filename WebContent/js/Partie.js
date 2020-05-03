@@ -7,11 +7,12 @@ class Partie {
 	console.log(NB_JOUEUR);
 	this.cpt = 0 ;
 	this.aQuiLeTour = 0 ; 
-	this.joueurs = []
+	this.joueurs = [];
 	for (let i = 0 ; i<NB_JOUEUR ; i++) {
-		var joueur = new Joueur(i)
-		this.joueurs.push(joueur)
-		Page.moveJeton(joueur, 0 )
+
+		var joueur = new Joueur(i);
+		this.joueurs.push(joueur);
+		Page.moveJeton(joueur, 0 );
 	}
 	this.detectionSexeFaite = false;
 	this.detectionPermisFaite = false;
@@ -29,7 +30,7 @@ class Partie {
 		if ( ! this.joueurs[this.aQuiLeTour].tourPasse){
 			if (31 != this.joueurs[this.aQuiLeTour].pos){
 				if (this.joueurs[this.aQuiLeTour].pos + des > 31){
-					des = 31 - this.joueurs[this.aQuiLeTour].pos
+					des = 31 - this.joueurs[this.aQuiLeTour].pos;
 				}
 							
 				console.log(this.joueurs[this.aQuiLeTour].name +" a fait : " + des);			
@@ -233,14 +234,31 @@ class Partie {
 		while (this.nbJ12 < NB_JOUEUR & ! this.STOP){
 			let j = this.joueurs[this.nbJ12];
 			if (j.pos > 0 ){
-				j.bouge(-1);	
-				this.regle(j);
+				j.bouge(-1);
+				if (j.pos != 12){ 	
+					this.regle(j);
+				} else {
+					j.rg12Imbrique = true ; 
+				}
 			}
 			this.nbJ12++;
 		}
 		if ( !(this.nbJ12 < NB_JOUEUR)){
 			this.r12 = false;
 			this.nbJ12 = 0 ;
+			var test = false;
+			var cpt = 0 ; 
+			while (!test){
+				if (this.joueurs[cpt].rg12Imbrique){
+					this.joueurs[cpt].rg12Imbrique = false ;
+					this.regle12(joueur);
+					test = true ;  
+				}
+				cpt++;
+				if (cpt == NB_JOUEUR){
+					test = true; 
+				}
+			}
 		}
 		
 	}

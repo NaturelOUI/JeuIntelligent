@@ -13,9 +13,12 @@ class Page {
 		
 	  }
 	lancerDes(){
-		//var alea = Math.floor(Math.random() * 6) +1 ;
-		var alea = 4;
-		//console.log(alea);
+		var alea = Math.floor(Math.random() * 6) +1 ;
+		//var alea = 4;
+		
+		/*var alea = TRICHEDES[COMPTEUR];
+		COMPTEUR++;
+		//console.log(alea);*/
 		document.getElementById("des").textContent = alea;	
 		if (PARTIESTARTED){
 			this.partie.incremente(alea);
@@ -149,6 +152,7 @@ class Page {
 		
 	}
 	static getName(joueur){
+		console.log(joueur.num);
 		var nomJoueur = document.getElementById("nomJ"+(joueur.num +1));	
 			return nomJoueur.innerHTML;
 	}
@@ -208,21 +212,3 @@ class Page {
 		
 	}
 }
-
-var NB_JOUEUR = 0;
-var PARTIESTARTED = false;
-var COLOR = [
-	"#000000",
-	"#0000ff",
-	"#00ff00",
-	"#00ffff",
-	"#ff0000",
-	"#ff00ff",
-	"#ffff00",
-	"#ffffff",
-	"#777777",
-	"#ff7f00",
-	"#096a09",
-	"#582900"];
-//var ACTION_NEEDED = false;
-let page = new Page(3);

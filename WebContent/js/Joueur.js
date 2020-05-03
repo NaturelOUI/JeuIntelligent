@@ -10,6 +10,7 @@ class Joueur {
 	permis;
 	telephone;
 	tourPasse;
+	rg12Imbrique;
 	
 	constructor(i){
 		this.num = i ; 
@@ -21,7 +22,11 @@ class Joueur {
 		this.permis = 0;
 		this.telephone = 0 ;
 		this.tourPasse = false ;  
+		this.rg12Imbrique = false;
 	}
+	get rg12Imbrique() {  return this.rg12Imbrique;   }
+	set rg12Imbrique(x) {  this.rg12Imbrique = x; }
+	
 	get num() { 
          return this.num; 
     }
@@ -63,6 +68,9 @@ class Joueur {
     }
 	set tourPasse(x) { 
          this.tourPasse = x;
+    }
+	set num(x) { 
+         this.num = x;
     }
 	boit(x){
 		Page.ecrire(this.name + " boit " + x);
