@@ -7,6 +7,9 @@ class Joueur {
 	pos;
 	gorgee;
 	genre;
+	permis;
+	telephone;
+	tourPasse;
 	
 	constructor(i){
 		this.num = i ; 
@@ -15,6 +18,9 @@ class Joueur {
 		this.pos = 0 ; 
 		this.gorgee = 0;
 		this.genre = 0;
+		this.permis = 0;
+		this.telephone = 0 ;
+		this.tourPasse = false ;  
 	}
 	get num() { 
          return this.num; 
@@ -31,6 +37,15 @@ class Joueur {
 	get genre() { 
          return this.genre; 
     }
+	get permis() { 
+         return this.permis; 
+    }
+	get telephone() { 
+         return this.telephone; 
+    }
+	get tourPasse() { 
+         return this.telephone; 
+    }
 	set pos(newPos) { 
          this.pos = newPos;
     }
@@ -40,7 +55,15 @@ class Joueur {
 	set genre(x) { 
          this.genre = x;
     }
-
+	set permis(x) { 
+         this.permis = x;
+    }
+	set telephone(x) { 
+         this.telephone = x;
+    }
+	set tourPasse(x) { 
+         this.tourPasse = x;
+    }
 	boit(x){
 		Page.ecrire(this.name + " boit " + x);
 		this.gorgee +=x;

@@ -15,35 +15,53 @@ class Partie {
 	}
 	this.detectionSexeFaite = false;
 	this.detectionPermisFaite = false;
+	this.detectionTelephoneFaite = false;
 	this.nombre = 0 ;
+	this.nbJ12 = 0 ;
+	this.STOP = false;
+	this.r12 = false;
+	
 	
   }
 	incremente(des){
+		//this.actionNessesaire = false ; 
+		Page.ecrire("___________________________________");
+		if ( ! this.joueurs[this.aQuiLeTour].tourPasse){
+			if (31 != this.joueurs[this.aQuiLeTour].pos){
+				if (this.joueurs[this.aQuiLeTour].pos + des > 31){
+					des = 31 - this.joueurs[this.aQuiLeTour].pos
+				}
+							
+				console.log(this.joueurs[this.aQuiLeTour].name +" a fait : " + des);			
+				Page.ecrire(this.joueurs[this.aQuiLeTour].name +" a fait : " + des);
+				this.joueurs[this.aQuiLeTour].bouge(des);
+				// que doit il faire : 
+				this.regle(this.joueurs[this.aQuiLeTour]);
+			}
+		}  else {
+			this.joueurs[this.aQuiLeTour].tourPasse = false;
+			Page.ecrire(this.joueurs[this.aQuiLeTour].name + " passe son tour");
+		}
 		
 		this.cpt++;
-		if (31 != this.joueurs[this.aQuiLeTour].pos){
-			if (this.joueurs[this.aQuiLeTour].pos + des > 31){
-				des = 31 - this.joueurs[this.aQuiLeTour].pos
-			}
-			
-			console.log(this.joueurs[this.aQuiLeTour].name +" a fait : " + des);
-			
-			//Page.moveJeton(this.joueurs[this.aQuiLeTour],des)
-			this.joueurs[this.aQuiLeTour].bouge(des);
-			//this.joueurs[this.aQuiLeTour].pos += des;			
-			Page.ecrire(this.joueurs[this.aQuiLeTour].name +" a fait : " + des);
-			
-			// que doit il faire : 
-			this.regle(this.joueurs[this.aQuiLeTour]);
-		}
 		this.aQuiLeTour = this.cpt%NB_JOUEUR;
+		
 	}
 	
 	recupChoix(numJoueur,choix){
 		//envoie vers la suite de la regle
-		//console.log(numJoueur)
-		//console.log(this.joueurs[numJoueur])
+		
 		this.regleSuite(this.joueurs[numJoueur], choix);
+
+		
+	}
+	recupDiceValue(numJoueur, dice){
+		
+		this.regleSuite(this.joueurs[numJoueur], dice);
+		/*if (this.nombreRegle12 != 0  ){
+			ACTION_NEEDED = false;
+			this.regleSuite12();
+		}*/
 		
 	}
 	
@@ -57,7 +75,8 @@ class Partie {
 	}
 	regle2(joueur){
 		Page.cacherLeDe();
-		var question = "Qui doit boire";
+		this.STOP = true ; 
+		var question = joueur.name + " : qui doit boire";
 		var choixListe = [];
 		for (let i = 0 ; i < NB_JOUEUR ; i++){
 			choixListe.push(this.joueurs[i].name);	
@@ -68,6 +87,10 @@ class Partie {
 
 		this.joueurs[choix].boit(1);
 		Page.afficherLeDe();
+		this.STOP = false;
+		if (this.r12){
+			this.regle12();
+		}
 	}
 	regle3(joueur){
 		joueur.boit(1)
@@ -77,7 +100,8 @@ class Partie {
 	}
 	regle5(joueur){
 		Page.cacherLeDe();
-		var question = "Qui doit boire";
+		this.STOP = true ;
+		var question = joueur.name + " : qui doit boire";
 		var choixListe = [];
 		for (let i = 0 ; i < NB_JOUEUR ; i++){
 			choixListe.push(this.joueurs[i].name);	
@@ -88,12 +112,16 @@ class Partie {
 	regleSuite5(joueur, choix){
 		this.nombre++
 		this.joueurs[choix].boit(1);
-		if (this.nombre >= 3 ){
+		if (this.nombre >= 2 ){
 			Page.afficherLeDe();
 			this.nombre = 0 ;
-			return;
-		}else {
-			var question = "Qui doit boire";
+			this.STOP = false ;
+			if (this.r12){
+				this.regle12(joueur);
+			}
+			
+		} else {
+			var question = joueur.name +  " : Qui doit boire";
 			var choixListe = [];
 			for (let i = 0 ; i < NB_JOUEUR ; i++){
 				choixListe.push(this.joueurs[i].name);	
@@ -112,7 +140,8 @@ class Partie {
 	}
 	regle7(joueur){
 		Page.cacherLeDe();
-		var question = "Combien as-tu d'oreilles?";
+		this.STOP = true;
+		var question = joueur.name +  " : Combien as-tu d'oreilles?";
 		var choixListe = [];
 		choixListe.push(0+" oreille");
 		choixListe.push(1+" oreille");
@@ -127,6 +156,11 @@ class Partie {
 			joueur.boit(choix )	
 		}
 		Page.afficherLeDe();
+		this.STOP = false ;
+			if (this.r12){
+				this.regle12(joueur);
+			}
+		
 	}
 	regle8(joueur){}
 	regle9(joueur){
@@ -135,7 +169,30 @@ class Partie {
 		this.regle2(joueur);
 		
 	}
-	regle10(joueur){}
+	regle10(joueur){
+		if (this.detectionTelephoneFaite){
+			for (let i = 0 ; i < NB_JOUEUR ; i++){
+			if (this.joueurs[i].telephone == 1 ){ // proprio
+				this.joueurs[i].boit(3);
+			}	
+		}
+		} else {
+			this.STOP = true;
+			this.detectionTelephone(joueur)
+		}
+	}
+	regleSuite10(joueur, choix){
+		this.detectionTelephoneSuite(choix)
+		for (let i = 0 ; i < NB_JOUEUR ; i++){
+			if (this.joueurs[i].telephone == 1 ){ // proprio
+				this.joueurs[i].boit(3);
+			}	
+		}
+		this.STOP = false ;
+		if (this.r12){
+			this.regle12(joueur);
+		}				
+	}
 	regle11(joueur){
 		if (this.detectionSexeFaite){
 			for (let i = 0 ; i < NB_JOUEUR ; i++){
@@ -144,6 +201,7 @@ class Partie {
 				}
 			}
 		} else {
+			this.STOP = true ;
 			this.detectionSexe(joueur, 1)
 		}
 	}
@@ -154,6 +212,10 @@ class Partie {
 				if (this.joueurs[i].genre == 1 ){ // genre = 1 --> fille
 					this.joueurs[i].boit(1);
 				}
+			}
+			this.STOP = false ;
+			if (this.r12){
+				this.regle12(joueur);
 			}
 		} else {
 			this.detectionSexeSuite(joueur, 1, choix);
@@ -166,17 +228,125 @@ class Partie {
 			
 	}
 	regle12(joueur){
-		for (let i = 0 ; i < NB_JOUEUR ; i++){
-			if (this.joueurs[i].pos > 0 ){
-				this.joueurs[i].bouge(-1);
-				this.regle(this.joueurs[i].pos, this.joueurs[i]);
+		this.r12 = true;
+		//for(let j of this.joueurs){
+		while (this.nbJ12 < NB_JOUEUR & ! this.STOP){
+			let j = this.joueurs[this.nbJ12];
+			if (j.pos > 0 ){
+				j.bouge(-1);	
+				this.regle(j);
 			}
+			this.nbJ12++;
+		}
+		if ( !(this.nbJ12 < NB_JOUEUR)){
+			this.r12 = false;
+			this.nbJ12 = 0 ;
+		}
+		
+	}
+	regleSuite12(){
+		
+	}
+	regle13(joueur){
+		if (this.detectionPermisFaite){
+			for (let i = 0 ; i < NB_JOUEUR ; i++){
+				if (this.joueurs[i].permis == -1 ){ // genre = 1 --> fille
+					this.joueurs[i].boit(1);
+				}
+			}
+		} else {
+			this.STOP = true ; 
+			this.detectionPermis(joueur)
 		}
 	}
-	regle13(joueur){}
-	regle14(joueur){}
-	regle15(joueur){}
-	regle16(joueur){}
+	regleSuite13(joueur, choix){
+		if (this.detectionPermisFaite){
+			for (let i = 0 ; i < NB_JOUEUR ; i++){
+				if (this.joueurs[i].permis == -1 ){ // -1 --> piéton
+					this.joueurs[i].boit(1);
+				}
+			}
+			this.STOP = false ;
+			if (this.r12){
+				this.regle12(joueur);
+			}
+		} else {
+			this.detectionPermisSuite(joueur, choix);
+			
+			if (this.detectionPermisFaite){
+				this.regleSuite(joueur,"choixNotNeeded") ; //regle 13 en theorie
+			}
+			
+		}
+	}
+	regle14(joueur){
+		Page.cacherLeDe();
+		this.STOP = true;
+		var question = joueur.name + " tu préfère : ";
+		var choixListe = [];
+		choixListe.push("Boire 3");
+		choixListe.push("Reculer de 8 cases");
+		Page.afficheChoix(joueur, question, choixListe)
+	}
+	regleSuite14(joueur, choix){
+		if (0 == choix){
+			joueur.boit(3);
+		} else {
+			joueur.bouge(-8)
+			this.regle6(joueur);
+		}
+		Page.afficherLeDe();
+		this.STOP = false ;
+		if (this.r12){
+			this.regle12(joueur);
+		}
+	}
+	
+	regle15(joueur){		
+		Page.creerFakeDice(joueur);
+		this.STOP = true ; 
+		Page.ecrire(joueur.name + " : lance le dé pour savoir combien tu dois boire");
+	}
+	regleSuite15(joueur, dice){
+		joueur.boit(dice);
+		this.STOP = false ;
+		if (this.r12){
+			this.regle12(joueur);
+		}
+	}
+	regle16(joueur){
+		Page.cacherLeDe();
+		this.STOP = true ; 
+		var question = joueur.name + " : qui doit boire";
+		var choixListe = [];
+		for (let i = 0 ; i < NB_JOUEUR ; i++){
+			choixListe.push(this.joueurs[i].name);	
+		}
+		Page.afficheChoix(joueur, question, choixListe)
+		
+	}
+	regleSuite16(joueur, choix){
+		this.nombre++
+		this.joueurs[choix].boit(1);
+		if (this.nombre >= 3 ){
+			Page.afficherLeDe();
+			this.nombre = 0 ;
+			this.STOP = false ;
+			if (this.r12){
+				this.regle12(joueur);
+			}
+			
+		} else {
+			var question = joueur.name +  " : Qui doit boire";
+			var choixListe = [];
+			for (let i = 0 ; i < NB_JOUEUR ; i++){
+				choixListe.push(this.joueurs[i].name);	
+			}
+			Page.afficheChoix(joueur, question, choixListe)
+		}
+		
+		
+	}
 	regle17(joueur){
 		for (let i = 0 ; i < NB_JOUEUR ; i++){
 			if (this.joueurs[i].pos > joueur.pos){
@@ -193,7 +363,8 @@ class Partie {
 				}
 			}
 		} else {
-			this.detectionSexe(joueur, -1)
+			this.detectionSexe(joueur, -1);
+			this.STOP = true ; 
 		}
 	}
 	regleSuite18(joueur, choix){
@@ -202,6 +373,10 @@ class Partie {
 				if (this.joueurs[i].genre == -1 ){ // genre = -1 --> garcon
 					this.joueurs[i].boit(1);
 				}
+			}
+			this.STOP = false ;
+			if (this.r12){
+				this.regle12(joueur);
 			}
 		} else {
 			this.detectionSexeSuite(joueur, -1, choix);
@@ -214,9 +389,11 @@ class Partie {
 	}
 	regle19(joueur){}
 	regle20(joueur){
+		this.STOP = true ;
 		if (this.detectionSexeFaite){
 			Page.cacherLeDe();
-			var question = "Designe une fille qui doit boire 3";
+			
+			var question = joueur.name +  " : Designe une fille qui doit boire 3";
 			var choixListe = [];
 			for (let i = 0 ; i < NB_JOUEUR ; i++){
 				if (this.joueurs[i].genre == 1 ){
@@ -227,6 +404,10 @@ class Partie {
 			if (0 == choixListe.length){
 				Page.ecrire("Ah ouais, soirée entre couilles");
 				Page.afficherLeDe();
+				this.STOP = false ;
+				if (this.r12){
+					this.regle12(joueur);
+				}
 			} else {
 				Page.afficheChoix(joueur, question, choixListe)
 			}
@@ -246,6 +427,10 @@ class Partie {
 			console.log(JoueursFille);
 			JoueursFille[choix].boit(3);
 			Page.afficherLeDe();
+			this.STOP = false ;
+			if (this.r12){
+				this.regle12(joueur);
+			}
 		} else {
 			this.detectionSexeSuite(joueur, 1, choix);
 			if (this.detectionSexeFaite){
@@ -257,33 +442,184 @@ class Partie {
 		joueur.bouge(-10)
 		this.regle11(joueur);
 	}
-	regle22(joueur){}
+	regle22(joueur){
+		Page.ecrire("C'est chaud pour vous..");
+		this.STOP = true ; 
+		Page.creerFakeDice(joueur);
+		Page.ecrire(this.joueurs[0].name + " : Lance le dé");
+				
+	}
+	regleSuite22(joueur, dice){
+		
+		if (this.nombre < NB_JOUEUR ){
+			if (dice == 6){
+				Page.ecrire("Aie aie aie, retour à la case départ pour " + this.joueurs[this.nombre].name );
+				this.joueurs[this.nombre].bouge(-1 * this.joueurs[this.nombre].pos);
+				
+			}
+			this.nombre ++ ;
+			if (this.nombre < NB_JOUEUR ){
+				Page.creerFakeDice(joueur);
+				Page.ecrire(this.joueurs[this.nombre].name + " : Lance le dé");
+			}
+			
+		} else {
+			this.nombre = 0 ;
+			this.STOP = false ;
+			if (this.r12){
+				this.regle12(joueur);
+			}
+		}
+		
+	}
 	regle23(joueur){
 		var max = this.joueurs[0].pos;
-		var who = 0 ;
-		for (let i = 1 ; i < NB_JOUEUR ; i++){
+		//var who = 0 ;
+		for (let i = 0 ; i < NB_JOUEUR ; i++){
 			if (this.joueurs[i].pos > max){
 				max = this.joueurs[i].pos;
 			}
 		}
-		for (let i = 1 ; i < NB_JOUEUR ; i++){
+		for (let i = 0 ; i < NB_JOUEUR ; i++){
 			if (this.joueurs[i].pos == max){
 				this.joueurs[i].boit(1)
 			}
 		}
 		
 	}
-	regle24(joueur){}
-	regle25(joueur){}
-	regle26(joueur){}
-	regle27(joueur){}
-	regle28(joueur){}
+	regle24(joueur){
+		Page.cacherLeDe();
+		this.STOP = true ; 
+		var question = joueur.name + " : lance une pièce";
+		var choixListe = [];
+		
+		choixListe.push("Lancer la pièce");	
+		
+		Page.afficheChoix(joueur, question, choixListe)
+	}
+	regleSuite24(joueur, choix){
+		
+		var alea = Math.floor(Math.random() * 2);
+		if (alea == 1 ){
+			Page.ecrire("PILE ! Les autres boivent ");
+			for(let j of this.joueurs){
+				if (j.num != joueur.num ){
+					j.boit(1)
+				}
+			}
+		} else {
+			Page.ecrire("FACE ! Tu bois");
+			joueur.boit(1)
+		}
+		Page.afficherLeDe();
+		this.STOP = false ;
+		if (this.r12){
+			this.regle12(joueur);
+		}
+	}
+	regle25(joueur){		
+		
+		Page.creerFakeDice(joueur);
+		this.STOP = true ; 
+		Page.ecrire(joueur.name + " : Bois et lance le dé pour savoir de combien tu vas reculer");
+		joueur.boit(1);
+	}
+	regleSuite25(joueur, dice){
+		joueur.bouge(dice * -1);
+		this.regle(joueur);
+		this.STOP = false ;
+		if (this.r12){
+			this.regle12(joueur);
+		}
+	}
+	regle26(joueur){
+		Page.cacherLeDe();
+		this.STOP = true ; 
+		var question = joueur.name + " raconte une blague ou bois 4 ";
+		var choixListe = [];
+		choixListe.push("Raconter une blague");
+		choixListe.push("Boire 4");
+		Page.afficheChoix(joueur, question, choixListe)
+	}
+	regleSuite26(joueur, choix){
+		if (1 == choix){
+			joueur.boit(4);
+		}
+		Page.afficherLeDe();
+		this.STOP = false ;
+		if (this.r12){
+			this.regle12(joueur);
+		}
+	}
+	
+	regle27(joueur){
+		joueur.boit(1);
+		joueur.tourPasse = true;
+	}
+	regle28(joueur){
+		if (this.detectionTelephoneFaite){
+			for (let i = 0 ; i < NB_JOUEUR ; i++){
+				if (this.joueurs[i].telephone == 1 ){ // proprio			
+					if (joueur == this.joueurs[i]){
+						Page.ecrire(joueur.name + " trinque tout seul (sers toi un deuxième verre pour le faire) " );
+						joueur.boit(2);
+					} else {
+						Page.ecrire(joueur.name + " trinque avec " + this.joueurs[i].name)
+						joueur.boit(1);
+						this.joueurs[i].boit(1);
+					}	
+				}	
+			}
+			
+		} else {
+			this.detectionTelephone(joueur);
+			this.STOP = true ; 
+		}
+	}
+	regleSuite28(joueur, choix){
+		this.detectionTelephoneSuite(choix)
+		for (let i = 0 ; i < NB_JOUEUR ; i++){
+			if (this.joueurs[i].telephone == 1 ){ // proprio
+				if (joueur == this.joueurs[i]){
+						Page.ecrire(joueur.name + " trinque tout seul (sers toi un deuxième verre pour le faire) " );
+						joueur.boit(2);
+					} else {
+						Page.ecrire(joueur.name + " trinque avec " + this.joueurs[i].name)
+						joueur.boit(1);
+						this.joueurs[i].boit(1);
+					}
+			}	
+		}
+		this.STOP = false ;
+		if (this.r12){
+			this.regle12(joueur);
+		}				
+	}
 	regle29(joueur){
 		joueur.bouge(-8);
 		joueur.boit(1);
 		this.regle21(joueur);
 	}
-	regle30(joueur){}
+	regle30(joueur){
+		this.regle1(joueur)
+		Page.cacherLeDe();
+		this.STOP = true;
+		var question = joueur.name + " Tu arrives à lire la règle ?";
+		var choixListe = [];
+		choixListe.push("oui");
+		choixListe.push("non");
+		Page.afficheChoix(joueur, question, choixListe)
+	}
+	regleSuite30(joueur, choix){
+		if (0 == choix){ // oui
+			joueur.bouge(-30);
+		}
+		Page.afficherLeDe();
+		this.STOP = false ;
+		if (this.r12){
+			this.regle12(joueur);
+		}
+	}
 
 	
 	
@@ -352,9 +688,67 @@ class Partie {
 			
 	}
 	detectionPermis(joueur){
-		
+		var choixListe = [];
+		for (let i = 0 ; i < NB_JOUEUR ; i++){
+				choixListe.push(this.joueurs[i].name);		
+		}
+		Page.cacherLeDe();
+		var question = "Clique ceux qui n'ont pas le permis";
+			
+		choixListe.push("terminé");
+		Page.afficheChoix(joueur, question, choixListe);
 	}
-	detectionPermisSuite(joueur, genre, choix){
+	detectionPermisSuite(joueur, choix){
+		var joueurVelo = [];
+		for (let i = 0 ; i < NB_JOUEUR ; i++){
+			if (this.joueurs[i].permis == 0 ){
+				joueurVelo.push(this.joueurs[i]);	
+			}
+		}
+		// Si clique sur terminé
+		if (choix == joueurVelo.length){
+			// tous les autres ont le permis
+			for(let j of joueurVelo){
+				j.permis = 1 ;
+			}
+			Page.afficherLeDe();
+			this.detectionPermisFaite = true ;	
+		} else {
+			joueurVelo[choix].permis = -1; // -1 -> pas de permis
+			var choixListe = [];
+			for (let i = 0 ; i < NB_JOUEUR ; i++){
+				if (this.joueurs[i].permis == 0 ){
+					choixListe.push(this.joueurs[i].name);	
+				}		
+			}
+			choixListe.push("terminé");
+			
+			var question = "Clique sur ceux qui n'ont pas le permis";
+			
+			Page.afficheChoix(joueur, question, choixListe)
+		}
+	}
+	
+	detectionTelephone(joueur){
+		var choixListe = [];
+		for (let i = 0 ; i < NB_JOUEUR ; i++){
+				choixListe.push(this.joueurs[i].name);		
+		}
+		Page.cacherLeDe();
+		var question = "Qui est le propriétaire du téléphone / ordi ?";
+
+		Page.afficheChoix(joueur, question, choixListe);
+	}
+	detectionTelephoneSuite(choix){
+		
+		this.joueurs[choix].telephone = 1; // 1 -> proprio
+		for (let j of this.joueurs){
+			if (j.telephone != 1 ){
+				j.telephone= -1 ; 
+			}
+		}
+		this.detectionTelephoneFaite = true ; 
+		Page.afficherLeDe()
 		
 	}
 	
@@ -490,7 +884,7 @@ class Partie {
 		    this.regleSuite11(joueur, choix)
 		    break;
 		  case 12:
-		    this.regleSuite12(joueur, choix)
+		    this.regleSuite12()
 		    break;
 		  case 13:
 		    this.regleSuite13(joueur, choix)

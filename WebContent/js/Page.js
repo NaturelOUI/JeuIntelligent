@@ -14,13 +14,28 @@ class Page {
 	  }
 	lancerDes(){
 		//var alea = Math.floor(Math.random() * 6) +1 ;
-		var alea = 20;
+		var alea = 4;
 		//console.log(alea);
-		document.getElementById("des").textContent = alea;
+		document.getElementById("des").textContent = alea;	
 		if (PARTIESTARTED){
 			this.partie.incremente(alea);
 		}
 	}
+	static creerFakeDice(joueur){
+		var btDe = document.getElementById("btDes");
+		btDe.setAttribute("onclick","page.recupFakeDice("+joueur.num +")");
+		//ACTION_NEEDED = true ; 
+		console.log("action Nessesaire");
+	}
+	recupFakeDice(numJoueur){
+		var btDe = document.getElementById("btDes");
+		btDe.setAttribute("onclick","page.lancerDes()");
+		var alea = Math.floor(Math.random() * 6) +1 ;
+		document.getElementById("des").textContent = alea;
+		this.partie.recupDiceValue(numJoueur, alea);
+			
+	}
+	
 	static decalerBoutonPlus(){
 		//console.log("decalage du bouton + ");
 		let boutonPlus = document.getElementById("ajouterJoueur");
@@ -157,6 +172,7 @@ class Page {
 		for (let i = 0 ; i < nb ; i++){
 			var choixX = document.createElement('button'); // is a node
 			choixX.setAttribute("onclick","page.transmitChoice("+ joueur.num +", "+i+")");
+			choixX.setAttribute("class","boutonChoix");
 			choixX.innerHTML = choixListe[i];
 			bulletPointChoix.appendChild(choixX);
 		}
@@ -165,20 +181,31 @@ class Page {
 		bulletPointQuestion.setAttribute("id","question");
 		bulletPointQuestion.innerHTML = question;
 		document.getElementById("CadreBas").appendChild(bulletPointQuestion);
+		//ACTION_NEEDED = true ; 
+		console.log("action Nessesaire");
 		
 	}
 	transmitChoice(numJoueur ,choice){
 		
-		this.partie.recupChoix(numJoueur, choice);
+		
 		document.getElementById("question").remove();
 		document.getElementById("reponse").remove();
+		/*for (let bt of document.getElementsByClassName("boutonChoix")){
+			bt.remove();
+		}*/
+		this.partie.recupChoix(numJoueur, choice);
 	}
 	
 	static cacherLeDe(){
 		document.getElementById("btDes").style.visibility = "hidden";
 	}
 	static afficherLeDe(){
-		document.getElementById("btDes").style.visibility = "visible";
+		var isBT = document.getElementsByClassName("boutonChoix");
+
+		if (isBT.length == 0){
+			document.getElementById("btDes").style.visibility = "visible";
+		} 
+		
 	}
 }
 
@@ -197,4 +224,5 @@ var COLOR = [
 	"#ff7f00",
 	"#096a09",
 	"#582900"];
+//var ACTION_NEEDED = false;
 let page = new Page(3);
