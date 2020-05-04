@@ -19,6 +19,7 @@ class Page {
 		/*var alea = TRICHEDES[COMPTEUR];
 		COMPTEUR++;
 		//console.log(alea);*/
+		Page.effacerText();
 		document.getElementById("des").textContent = alea;	
 		if (PARTIESTARTED){
 			this.partie.incremente(alea);
@@ -158,8 +159,17 @@ class Page {
 	}
 	static ecrire(text){
 		var bulletPoint = document.createElement('li'); // is a node
+		bulletPoint.setAttribute("class","bulletPoint");
 		bulletPoint.innerHTML = text;
 		document.getElementById("CadreBas").appendChild(bulletPoint);
+	}
+	static effacerText(){
+		let bulletPoints = document.getElementsByClassName("bulletPoint");
+		//console.log(bulletPoints.length)
+		for (let i = bulletPoints.length -1 ; i >= 0   ; i-- ){
+			//console.log(i);
+			bulletPoints[i].remove();
+		}
 	}
 	static afficheGorgee(joueur){
 		var joueurHtml = document.getElementById("joueur"+(joueur.num +1));		
