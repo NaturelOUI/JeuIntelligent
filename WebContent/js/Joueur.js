@@ -1,8 +1,8 @@
 console.log("chargement joueur");
 
 class Joueur {
+	
 	num;
-	//color;
 	name;
 	pos;
 	gorgee;
@@ -13,7 +13,8 @@ class Joueur {
 	rg12Imbrique;
 	
 	constructor(i){
-		this.num = i ; 
+		//Object.defineProperty(this,'num',{value: i});
+		this.num=i; ; 
 		//this.color = COLOR[i];
 		this.name = Page.getName(this)
 		this.pos = 0 ; 
@@ -29,6 +30,9 @@ class Joueur {
 	
 	get num() { 
          return this.num; 
+    }
+	set num(x) { 
+         this.num = x;
     }
 	get pos() { 
          return this.pos; 
@@ -69,9 +73,7 @@ class Joueur {
 	set tourPasse(x) { 
          this.tourPasse = x;
     }
-	set num(x) { 
-         this.num = x;
-    }
+
 	boit(x){
 		Page.ecrire(this.name + " boit " + x);
 		this.gorgee +=x;

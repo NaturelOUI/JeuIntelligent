@@ -10,10 +10,10 @@
 	
     <link rel="stylesheet" href="<c:url value="css/style.css"/>"/>
     
-	<script type="text/javascript" src="<c:url value="js/Joueur.js" />"></script>
-	<script type="text/javascript" src="<c:url value="js/Partie.js" />"></script>
-	<script type="text/javascript" src="<c:url value="js/Page.js" />"></script>
-
+	<script type="text/javascript" src="<c:url value="js/Joueur.js" />" ></script>
+	<script type="text/javascript" src="<c:url value="js/Partie.js" />" ></script>
+	<script type="text/javascript" src="<c:url value="js/Page.js" />" ></script>
+	
 	
     <title>Bienvenue ! </title>
   </head>
@@ -130,7 +130,7 @@
                 <button id="btAjouterJoueur" onclick="Page.addPlayer()">+</button>
               </div>
             </div>
-            <div>
+            <div id="LancerPartie">
             	<button id="btLancerPartie" onclick="page.lancerPartie()">Lancer la partie</button>
             </div>
           </td>
@@ -689,11 +689,9 @@
         </tr>
       </table>
     </div>
-	<div id="CadreBas">
-		<ul>
-			
-		</ul>
-	</div>
-	<script type="text/javascript" src="<c:url value="js/main.js" />"></script>
+	<ul id="CadreBas">
+		
+	</ul>
+	<script type="text/javascript" src="<c:url value="js/main.js" />" ></script>
   </body>
 </html>

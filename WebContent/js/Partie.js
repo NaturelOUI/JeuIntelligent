@@ -1,7 +1,17 @@
 console.log("chargement Partie");
 
 class Partie {
-	 
+	/*
+	cpt;
+	aQuiLeTour;
+	joueurs;
+	detectionSexeFaite;
+	detectionTelephoneFaite;
+	nombre;
+	nbJ12;
+	STOP;
+	r12;
+	*/
   constructor(NB_JOUEUR) {
     
 	console.log(NB_JOUEUR);
@@ -10,7 +20,7 @@ class Partie {
 	this.joueurs = [];
 	for (let i = 0 ; i<NB_JOUEUR ; i++) {
 
-		var joueur = new Joueur(i);
+		let joueur = new Joueur(i);
 		this.joueurs.push(joueur);
 		Page.moveJeton(joueur, 0 );
 	}
@@ -82,8 +92,8 @@ class Partie {
 	regle2(joueur){
 		Page.cacherLeDe();
 		this.STOP = true ; 
-		var question = joueur.name + " : qui doit boire";
-		var choixListe = [];
+		let question = joueur.name + " : Qui doit boire ?";
+		let choixListe = [];
 		for (let i = 0 ; i < NB_JOUEUR ; i++){
 			choixListe.push(this.joueurs[i].name);	
 		}
@@ -107,8 +117,8 @@ class Partie {
 	regle5(joueur){
 		Page.cacherLeDe();
 		this.STOP = true ;
-		var question = joueur.name + " : qui doit boire";
-		var choixListe = [];
+		let question = joueur.name + " : Qui doit boire ?";
+		let choixListe = [];
 		for (let i = 0 ; i < NB_JOUEUR ; i++){
 			choixListe.push(this.joueurs[i].name);	
 		}
@@ -127,8 +137,8 @@ class Partie {
 			}
 			
 		} else {
-			var question = joueur.name +  " : Qui doit boire";
-			var choixListe = [];
+			let question = joueur.name +  " : Qui doit boire ?";
+			let choixListe = [];
 			for (let i = 0 ; i < NB_JOUEUR ; i++){
 				choixListe.push(this.joueurs[i].name);	
 			}
@@ -147,8 +157,8 @@ class Partie {
 	regle7(joueur){
 		Page.cacherLeDe();
 		this.STOP = true;
-		var question = joueur.name +  " : Combien as-tu d'oreilles?";
-		var choixListe = [];
+		let question = joueur.name +  " : Combien as-tu d'oreilles?";
+		let choixListe = [];
 		choixListe.push(0+" oreille");
 		choixListe.push(1+" oreille");
 		for (let i = 2 ; i < 5 ; i++){
@@ -251,8 +261,8 @@ class Partie {
 		if ( !(this.nbJ12 < NB_JOUEUR)){
 			this.r12 = false;
 			this.nbJ12 = 0 ;
-			var test = false;
-			var cpt = 0 ; 
+			let test = false;
+			let cpt = 0 ; 
 			while (!test){
 				if (this.joueurs[cpt].rg12Imbrique){
 					this.joueurs[cpt].rg12Imbrique = false ;
@@ -305,8 +315,8 @@ class Partie {
 	regle14(joueur){
 		Page.cacherLeDe();
 		this.STOP = true;
-		var question = joueur.name + " tu préfère : ";
-		var choixListe = [];
+		let question = joueur.name + " tu préfère : ";
+		let choixListe = [];
 		choixListe.push("Boire 3");
 		choixListe.push("Reculer de 8 cases");
 		Page.afficheChoix(joueur, question, choixListe)
@@ -340,8 +350,8 @@ class Partie {
 	regle16(joueur){
 		Page.cacherLeDe();
 		this.STOP = true ; 
-		var question = joueur.name + " : qui doit boire";
-		var choixListe = [];
+		let question = joueur.name + " : Qui doit boire ? ";
+		let choixListe = [];
 		for (let i = 0 ; i < NB_JOUEUR ; i++){
 			choixListe.push(this.joueurs[i].name);	
 		}
@@ -360,8 +370,8 @@ class Partie {
 			}
 			
 		} else {
-			var question = joueur.name +  " : Qui doit boire";
-			var choixListe = [];
+			let question = joueur.name +  " : Qui doit boire";
+			let choixListe = [];
 			for (let i = 0 ; i < NB_JOUEUR ; i++){
 				choixListe.push(this.joueurs[i].name);	
 			}
@@ -416,8 +426,8 @@ class Partie {
 		if (this.detectionSexeFaite){
 			Page.cacherLeDe();
 			
-			var question = joueur.name +  " : Designe une fille qui doit boire 3";
-			var choixListe = [];
+			let question = joueur.name +  " : Designe une fille qui doit boire 3";
+			let choixListe = [];
 			for (let i = 0 ; i < NB_JOUEUR ; i++){
 				if (this.joueurs[i].genre == 1 ){
 					choixListe.push(this.joueurs[i].name);
@@ -441,7 +451,7 @@ class Partie {
 	}
 	regleSuite20(joueur, choix){
 		if (this.detectionSexeFaite){
-			var JoueursFille = [];
+			let JoueursFille = [];
 			for (let i = 0 ; i < NB_JOUEUR ; i++){
 				if (this.joueurs[i].genre == 1 ){
 					JoueursFille.push(this.joueurs[i]);
@@ -496,8 +506,8 @@ class Partie {
 		
 	}
 	regle23(joueur){
-		var max = this.joueurs[0].pos;
-		//var who = 0 ;
+		let max = this.joueurs[0].pos;
+		//let who = 0 ;
 		for (let i = 0 ; i < NB_JOUEUR ; i++){
 			if (this.joueurs[i].pos > max){
 				max = this.joueurs[i].pos;
@@ -513,8 +523,8 @@ class Partie {
 	regle24(joueur){
 		Page.cacherLeDe();
 		this.STOP = true ; 
-		var question = joueur.name + " : lance une pièce";
-		var choixListe = [];
+		let question = joueur.name + " : lance une pièce";
+		let choixListe = [];
 		
 		choixListe.push("Lancer la pièce");	
 		
@@ -522,7 +532,7 @@ class Partie {
 	}
 	regleSuite24(joueur, choix){
 		
-		var alea = Math.floor(Math.random() * 2);
+		let alea = Math.floor(Math.random() * 2);
 		if (alea == 1 ){
 			Page.ecrire("PILE ! Les autres boivent ");
 			for(let j of this.joueurs){
@@ -558,8 +568,8 @@ class Partie {
 	regle26(joueur){
 		Page.cacherLeDe();
 		this.STOP = true ; 
-		var question = joueur.name + " raconte une blague ou bois 4 ";
-		var choixListe = [];
+		let question = joueur.name + " raconte une blague ou bois 4 ";
+		let choixListe = [];
 		choixListe.push("Raconter une blague");
 		choixListe.push("Boire 4");
 		Page.afficheChoix(joueur, question, choixListe)
@@ -627,8 +637,8 @@ class Partie {
 		this.regle1(joueur)
 		Page.cacherLeDe();
 		this.STOP = true;
-		var question = joueur.name + " Tu arrives à lire la règle ?";
-		var choixListe = [];
+		let question = joueur.name + " Tu arrives à lire la règle ?";
+		let choixListe = [];
 		choixListe.push("oui");
 		choixListe.push("non");
 		Page.afficheChoix(joueur, question, choixListe)
@@ -647,7 +657,7 @@ class Partie {
 	
 	
 	detectionSexe(joueur, genre){
-		var choixListe = [];
+		let choixListe = [];
 		for (let i = 0 ; i < NB_JOUEUR ; i++){
 				choixListe.push(this.joueurs[i].name);		
 		}
@@ -655,12 +665,12 @@ class Partie {
 		Page.cacherLeDe();
 		if (genre == 1){
 			if (joueur.pos == 20 ){
-				var question = "Clique sur TOUTES les filles pour commencer";
+				let question = "Clique sur TOUTES les filles pour commencer";
 			} else {
-				var question = "Clique sur les filles";
+				let question = "Clique sur les filles";
 			}
 		} else {
-			var question = "Clique sur les mecs";
+			let question = "Clique sur les mecs";
 		}
 			
 		choixListe.push("terminé");
@@ -668,7 +678,7 @@ class Partie {
 	}
 	detectionSexeSuite(joueur, genre, choix){
 		// onchange le genre de la personne cliqué
-		var joueursNonBinaire = [];
+		let joueursNonBinaire = [];
 		for (let i = 0 ; i < NB_JOUEUR ; i++){
 			if (this.joueurs[i].genre == 0 ){
 				joueursNonBinaire.push(this.joueurs[i]);	
@@ -688,7 +698,7 @@ class Partie {
 			console.log(choix);
 			console.log(joueursNonBinaire);
 			joueursNonBinaire[choix].genre = 1 * genre ;		
-			var choixListe = [];
+			let choixListe = [];
 			for (let i = 0 ; i < NB_JOUEUR ; i++){
 				if (this.joueurs[i].genre == 0 ){
 					choixListe.push(this.joueurs[i].name);	
@@ -697,13 +707,13 @@ class Partie {
 			choixListe.push("terminé");
 			if (genre == 1){
 				if (joueur.pos == 20 ){
-					var question = "Clique sur TOUTES les filles pour commencer";
+					let question = "Clique sur TOUTES les filles pour commencer";
 				} else {
-					var question = "Clique sur les filles";
+					let question = "Clique sur les filles";
 				}
 				
 			} else {
-				var question = "Clique sur les mecs";
+				let question = "Clique sur les mecs";
 			}
 			Page.afficheChoix(joueur, question, choixListe)
 		}
@@ -711,18 +721,18 @@ class Partie {
 			
 	}
 	detectionPermis(joueur){
-		var choixListe = [];
+		let choixListe = [];
 		for (let i = 0 ; i < NB_JOUEUR ; i++){
 				choixListe.push(this.joueurs[i].name);		
 		}
 		Page.cacherLeDe();
-		var question = "Clique ceux qui n'ont pas le permis";
+		let question = "Clique ceux qui n'ont pas le permis";
 			
 		choixListe.push("terminé");
 		Page.afficheChoix(joueur, question, choixListe);
 	}
 	detectionPermisSuite(joueur, choix){
-		var joueurVelo = [];
+		let joueurVelo = [];
 		for (let i = 0 ; i < NB_JOUEUR ; i++){
 			if (this.joueurs[i].permis == 0 ){
 				joueurVelo.push(this.joueurs[i]);	
@@ -738,7 +748,7 @@ class Partie {
 			this.detectionPermisFaite = true ;	
 		} else {
 			joueurVelo[choix].permis = -1; // -1 -> pas de permis
-			var choixListe = [];
+			let choixListe = [];
 			for (let i = 0 ; i < NB_JOUEUR ; i++){
 				if (this.joueurs[i].permis == 0 ){
 					choixListe.push(this.joueurs[i].name);	
@@ -746,19 +756,19 @@ class Partie {
 			}
 			choixListe.push("terminé");
 			
-			var question = "Clique sur ceux qui n'ont pas le permis";
+			let question = "Clique sur ceux qui n'ont pas le permis";
 			
 			Page.afficheChoix(joueur, question, choixListe)
 		}
 	}
 	
 	detectionTelephone(joueur){
-		var choixListe = [];
+		let choixListe = [];
 		for (let i = 0 ; i < NB_JOUEUR ; i++){
 				choixListe.push(this.joueurs[i].name);		
 		}
 		Page.cacherLeDe();
-		var question = "Qui est le propriétaire du téléphone / ordi ?";
+		let question = "Qui est le propriétaire du téléphone / ordi ?";
 
 		Page.afficheChoix(joueur, question, choixListe);
 	}

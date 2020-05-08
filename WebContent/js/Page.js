@@ -1,5 +1,6 @@
 class Page {
-	
+	partie;
+	nbJoueur;
 	constructor(nbJoueur) {		
 		console.log("ajustement de la taille du plateau en cours")
 		Page.adjustDivHeight(1000);
@@ -13,10 +14,10 @@ class Page {
 		
 	  }
 	lancerDes(){
-		var alea = Math.floor(Math.random() * 6) +1 ;
-		//var alea = 4;
+		let alea = Math.floor(Math.random() * 6) +1 ;
+		//let alea = 4;
 		
-		/*var alea = TRICHEDES[COMPTEUR];
+		/*let alea = TRICHEDES[COMPTEUR];
 		COMPTEUR++;
 		//console.log(alea);*/
 		Page.effacerText();
@@ -26,15 +27,15 @@ class Page {
 		}
 	}
 	static creerFakeDice(joueur){
-		var btDe = document.getElementById("btDes");
+		let btDe = document.getElementById("btDes");
 		btDe.setAttribute("onclick","page.recupFakeDice("+joueur.num +")");
 		//ACTION_NEEDED = true ; 
 		console.log("action Nessesaire");
 	}
 	recupFakeDice(numJoueur){
-		var btDe = document.getElementById("btDes");
+		let btDe = document.getElementById("btDes");
 		btDe.setAttribute("onclick","page.lancerDes()");
-		var alea = Math.floor(Math.random() * 6) +1 ;
+		let alea = Math.floor(Math.random() * 6) +1 ;
 		document.getElementById("des").textContent = alea;
 		this.partie.recupDiceValue(numJoueur, alea);
 			
@@ -46,26 +47,26 @@ class Page {
 		//console.log(boutonPlus);
 		// remove button by id (bec worries about 2 items with same id)
 		document.getElementById("ajouterJoueur").remove();
-		var joueurList = document.getElementById("joueurListe");
+		let joueurList = document.getElementById("joueurListe");
 		//add button
 		joueurList.appendChild(boutonPlus);		
 	}
 	static removePlayer(id){
-		var num = id.substring(6, id.length);
+		let num = id.substring(6, id.length);
 		document.getElementById("joueur"+num).remove();
 		
 		//decalage des autre joueurs
 		for (let i = parseInt(num)+1 ; i <= NB_JOUEUR; i++){
-			var joueurHtml = document.getElementById("joueur"+i);	
+			let joueurHtml = document.getElementById("joueur"+i);	
 			joueurHtml.setAttribute("id","joueur"+(i-1));
 			
-			var nomJoueur = document.getElementById("nomJ"+i);	
+			let nomJoueur = document.getElementById("nomJ"+i);	
 			nomJoueur.setAttribute("id","nomJ"+(i-1));
 			
-			var bouton = document.getElementById("btHide"+i);
+			let bouton = document.getElementById("btHide"+i);
 			bouton.setAttribute("id","btHide"+(i-1));
 			
-			var jeton = joueurHtml.getElementsByClassName("cercle" + i)[0];
+			let jeton = joueurHtml.getElementsByClassName("cercle" + i)[0];
 			
 			jeton.setAttribute("class","cercle"+(i-1));
 			
@@ -76,8 +77,8 @@ class Page {
 	static addPlayer(){
 		NB_JOUEUR = NB_JOUEUR + 1 ; 
 		console.log("nombre de joueur = " + NB_JOUEUR);
-		var joueurList = document.getElementById("joueurListe"); 
-		var joueurHtml = document.createElement('div'); // is a node
+		let joueurList = document.getElementById("joueurListe"); 
+		let joueurHtml = document.createElement('div'); // is a node
 		joueurHtml.setAttribute("id", "joueur"+NB_JOUEUR);
 		joueurHtml.setAttribute("class", "joueur");
 		
@@ -86,26 +87,25 @@ class Page {
 		// INTERIEUR DE LA DIV
 		
 		// bouton Hide
-		var bouton = document.createElement('button');
+		let bouton = document.createElement('button');
 		bouton.setAttribute("id","btHide"+NB_JOUEUR);
+		bouton.setAttribute("class","btHide");
 		bouton.setAttribute("onclick","Page.removePlayer(this.id)");
 		bouton.innerHTML = "X";
 		joueurHtml.appendChild(bouton);
 		//joueurHtml.innerHTML += "Joueur " + NB_JOUEUR +" :";
 		
 		// editable text
-		var nomJoueur = document.createElement('div'); // is a node
+		let nomJoueur = document.createElement('div'); // is a node
 		nomJoueur.setAttribute("id", "nomJ"+NB_JOUEUR);
 		nomJoueur.setAttribute("class", "txtEdit");
 		nomJoueur.setAttribute("contenteditable", "true");
 		nomJoueur.innerHTML = "joueur" + NB_JOUEUR;
 		joueurHtml.appendChild(nomJoueur);
 		
-		var jeton = document.createElement('div'); // is a node
-		jeton.setAttribute("class", "cercle" + NB_JOUEUR);
+		let jeton = document.createElement('div'); // is a node
+		jeton.setAttribute("class", "cercle cercle" + NB_JOUEUR);
 		jeton.style.visibility = "visible";
-		jeton.style.height = "10px";
-		jeton.style.width = "12px";
 		joueurHtml.appendChild(jeton);
 		joueurList.appendChild(joueurHtml);
 		
@@ -114,8 +114,8 @@ class Page {
 	}
 	static adjustDivHeight(time){
 		setTimeout(() => { 		
-			var hgtImg = document.getElementById('imgPlateau').clientHeight;
-			var tds = document.getElementsByClassName("divTd");			
+			let hgtImg = document.getElementById('imgPlateau').clientHeight;
+			let tds = document.getElementsByClassName("divTd");			
 			for (let step = 0; step < 32; step++) {
 				tds[step].setAttribute("style","height:"+((hgtImg - 20) /5)+"px");			
 				}
@@ -130,35 +130,37 @@ class Page {
 
 		for (let i = 1 ; i<= NB_JOUEUR; i++) {
 			document.getElementById("btHide"+i).remove();
-			var nomJoueur= document.getElementById("nomJ"+i);
+			let nomJoueur= document.getElementById("nomJ"+i);
 			nomJoueur.setAttribute("contenteditable", "false");
-			var compteurGorgee = document.createElement("div");
+			nomJoueur.setAttribute("class", "txtEditValidated");
+			let compteurGorgee = document.createElement("div");
 			compteurGorgee.setAttribute("class", "cptGorgee");
 			compteurGorgee.innerHTML = 0 ; 
-			var joueurHtml = document.getElementById("joueur"+i);
+			let joueurHtml = document.getElementById("joueur"+i);
 			joueurHtml.appendChild(compteurGorgee);
 			
 		}
+		
 		document.getElementById("ajouterJoueur").remove();
-		document.getElementById("btLancerPartie").remove();
+		document.getElementById("LancerPartie").remove();
 		
 		
 	}
 	
 	static moveJeton(joueur, combien){
-		var cercle1 = document.getElementById("case" + joueur.pos).getElementsByClassName("cercle" + (joueur.num +1))[0];
+		let cercle1 = document.getElementById("case" + joueur.pos).getElementsByClassName("cercle" + (joueur.num +1))[0];
 		cercle1.style.visibility = "hidden";
-		var cercle2 = document.getElementById("case" + (joueur.pos + combien)).getElementsByClassName("cercle" + (joueur.num +1))[0];
+		let cercle2 = document.getElementById("case" + (joueur.pos + combien)).getElementsByClassName("cercle" + (joueur.num +1))[0];
 		cercle2.style.visibility = "visible";
 		
 	}
 	static getName(joueur){
 		console.log(joueur.num);
-		var nomJoueur = document.getElementById("nomJ"+(joueur.num +1));	
+		let nomJoueur = document.getElementById("nomJ"+(joueur.num +1));	
 			return nomJoueur.innerHTML;
 	}
 	static ecrire(text){
-		var bulletPoint = document.createElement('li'); // is a node
+		let bulletPoint = document.createElement('li'); // is a node
 		bulletPoint.setAttribute("class","bulletPoint");
 		bulletPoint.innerHTML = text;
 		document.getElementById("CadreBas").appendChild(bulletPoint);
@@ -172,8 +174,8 @@ class Page {
 		}
 	}
 	static afficheGorgee(joueur){
-		var joueurHtml = document.getElementById("joueur"+(joueur.num +1));		
-		var cptGorgee = joueurHtml.getElementsByClassName("cptGorgee")[0];
+		let joueurHtml = document.getElementById("joueur"+(joueur.num +1));		
+		let cptGorgee = joueurHtml.getElementsByClassName("cptGorgee")[0];
 		cptGorgee.innerHTML = joueur.gorgee;
 		
 		
@@ -181,17 +183,17 @@ class Page {
 	}
 	static afficheChoix(joueur, question, choixListe){
 		const nb = choixListe.length;
-		var bulletPointChoix = document.createElement('li'); // is a node
+		let bulletPointChoix = document.createElement('li'); // is a node
 		bulletPointChoix.setAttribute("id","reponse");
 		for (let i = 0 ; i < nb ; i++){
-			var choixX = document.createElement('button'); // is a node
+			let choixX = document.createElement('button'); // is a node
 			choixX.setAttribute("onclick","page.transmitChoice("+ joueur.num +", "+i+")");
 			choixX.setAttribute("class","boutonChoix");
 			choixX.innerHTML = choixListe[i];
 			bulletPointChoix.appendChild(choixX);
 		}
 		document.getElementById("CadreBas").appendChild(bulletPointChoix);
-		var bulletPointQuestion = document.createElement('li'); // is a node
+		let bulletPointQuestion = document.createElement('li'); // is a node
 		bulletPointQuestion.setAttribute("id","question");
 		bulletPointQuestion.innerHTML = question;
 		document.getElementById("CadreBas").appendChild(bulletPointQuestion);
@@ -214,7 +216,7 @@ class Page {
 		document.getElementById("btDes").style.visibility = "hidden";
 	}
 	static afficherLeDe(){
-		var isBT = document.getElementsByClassName("boutonChoix");
+		let isBT = document.getElementsByClassName("boutonChoix");
 
 		if (isBT.length == 0){
 			document.getElementById("btDes").style.visibility = "visible";

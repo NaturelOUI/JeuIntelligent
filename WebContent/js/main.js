@@ -1,8 +1,6 @@
-
-
-var NB_JOUEUR = 0;
-var PARTIESTARTED = false;
-var COLOR = [
+let NB_JOUEUR = 0;
+let PARTIESTARTED = false;
+let COLOR = [
 	"#000000",
 	"#0000ff",
 	"#00ff00",
@@ -15,8 +13,8 @@ var COLOR = [
 	"#ff7f00",
 	"#096a09",
 	"#582900"];
-//var ACTION_NEEDED = false;
+
 console.log("main");
-var COMPTEUR = 0 ;
-var TRICHEDES = [14,13,12];
+let COMPTEUR = 0 ;
+let TRICHEDES = [14,13,12];
 let page = new Page(3);

@@ -2,9 +2,10 @@
 
 body {
 	background-position: top;
-	background-color: Gainsboro;
+	background-color: #233D4D;
 	margin: 0;
     padding: 0;
+    color: #fff;
 
 	}
 table{
@@ -12,25 +13,47 @@ table{
 	width: 100%;
 	margin: auto;
 	}
+button {
+  display: inline-block;
+  padding: 8px 14px;
+  font-size: 90%;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4d6471;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 5px #999;
+}
+
+button:hover {background-color: #555753}
+
+button:active {
+  background-color: #555753;
+  box-shadow: 0 5px #2e3436;
+  transform: translateY(2px);
+}
 
 #td1 {
-	border: 1px solid; 
+	/*border: 1px solid; */
     width: 20%;
 
-    color: DarkCyan;
+    /*color: DarkCyan;*/
 }
 #td2 {
-	border: 1px solid; 
+	/*border: 1px solid; */
 	
     align-content: center;
-    color: DarkCyan;
+    /*color: DarkCyan;*/
 }
 #td3 {
-	border: 1px solid; 
+	/*border: 1px solid; */
 	
 	width: 20%;
 
-    color: DarkCyan;
+    /*color: DarkCyan;*/
 }
 .erreur {
 	color: red;
@@ -62,7 +85,7 @@ img {
 
 
 .tdPlateau {
-   	border: 1px solid red; 
+   /*	border: 1px solid red; */
    	width: 14%;
 }
 #divPlateau {
@@ -200,19 +223,73 @@ img {
 	font-size: 3em;
 }
 
-
 .joueur {
 	display:flex;
-	font-size: 14px;
-	justify-content: space-around;
+	font-size: 20px;
+	align-items: center;
+	/*align-items: flex-start;
+	justify-content: space-around;*/
+	padding: 5px;
+	
 	/*visibility: hidden;*/
+}
+.btHide {
+	align-content: flex-start;
 }
 .txtEdit{
 	/*width: 50%;*/
-	background-color: white;
+	background-color: #999;
+	margin: auto;
+	color: #2e3436;
+	min-width: 18%;
+	border-radius: 15px;
+	padding: 6px 6px;
+}
+.txtEdit:hover {background-color: #ddd}
+.txtEdit:focus {background-color: #ddd}
+.txtEditValidated{
+	/*width: 50%;*/
+	background-color: 233D4D;
+	margin: auto;
+	color: #fff;
+}
+.cercle{
+	align-content: flex-end;
+	right: 5px;
+	height: 15px;
+	width: 18px;
 }
 
+#ajouterJoueur{
+	display: flex;
+	padding: 10px;
+
+	justify-content: center;
+}
+#btajouterJoueur{
+	
+
+}
+#LancerPartie{
+	display: flex;
+	padding: 10px;
+	justify-content: center;
+}
+#btLancerPartie{
+	
+
+}
 #CadreBas{
 	display:flex;
 	flex-direction: column-reverse;
+	
+}
+li{
+	margin : auto;
+	padding: 5px;
+	color: #fff;
+	
+}
+ul{
+	list-style: none;
 }
