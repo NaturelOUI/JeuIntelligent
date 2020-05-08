@@ -50,7 +50,13 @@ class Partie {
 				// que doit il faire : 
 				this.regle(this.joueurs[this.aQuiLeTour]);
 				if (this.joueurs[this.aQuiLeTour].pos == 31 ){
-					
+					/*
+					const index = this.joueurs.indexOf(this.joueurs[this.aQuiLeTour]);
+					if (index > -1) {
+					  this.joueurs.splice(index, 1);
+					}
+					*/
+
 				}
 			}
 		} else {
@@ -435,7 +441,7 @@ class Partie {
 						
 			}
 			if (0 == choixListe.length){
-				Page.ecrire("Ah ouais, soirée entre couilles");
+				//Page.ecrire("Ah ouais, soirée entre couilles");
 				Page.afficherLeDe();
 				this.STOP = false ;
 				if (this.r12){
@@ -661,16 +667,17 @@ class Partie {
 		for (let i = 0 ; i < NB_JOUEUR ; i++){
 				choixListe.push(this.joueurs[i].name);		
 		}
-
+		
 		Page.cacherLeDe();
+		let question;
 		if (genre == 1){
 			if (joueur.pos == 20 ){
-				let question = "Clique sur TOUTES les filles pour commencer";
+				question = "Clique sur TOUTES les filles pour commencer";
 			} else {
-				let question = "Clique sur les filles";
+				question = "Clique sur les filles";
 			}
 		} else {
-			let question = "Clique sur les mecs";
+			question = "Clique sur les mecs";
 		}
 			
 		choixListe.push("terminé");
@@ -705,15 +712,16 @@ class Partie {
 				}		
 			}
 			choixListe.push("terminé");
+			let question;
 			if (genre == 1){
 				if (joueur.pos == 20 ){
-					let question = "Clique sur TOUTES les filles pour commencer";
+					question = "Clique sur TOUTES les filles pour commencer";
 				} else {
-					let question = "Clique sur les filles";
+					question = "Clique sur les filles";
 				}
 				
 			} else {
-				let question = "Clique sur les mecs";
+				question = "Clique sur les mecs";
 			}
 			Page.afficheChoix(joueur, question, choixListe)
 		}

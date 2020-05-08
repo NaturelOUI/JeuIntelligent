@@ -15,7 +15,8 @@ class Page {
 	  }
 	lancerDes(){
 		let alea = Math.floor(Math.random() * 6) +1 ;
-		//let alea = 4;
+		//let alea = Math.floor(Math.random() * 30) +1 ;
+		//let alea = 20;
 		
 		/*let alea = TRICHEDES[COMPTEUR];
 		COMPTEUR++;
