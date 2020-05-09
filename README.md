@@ -1,6 +1,6 @@
 <h1>Jeu Intelligent</h1>
 <p>
-  This is a website about a drinking game I used to play with my friend.
+  This is a website about a drinking game I used to play with my friends.
   <br>
   You can play at : http://176.181.167.238/JeuIntelligent/accueil 
 </p>
