@@ -38,7 +38,7 @@ class Partie {
 	incremente(des){
 		//this.actionNessesaire = false ; 
 		//Page.ecrire("___________________________________");
-		
+		let qqnFini = false ; 
 		if ( ! this.joueurs[this.aQuiLeTour].tourPasse){
 			if (31 != this.joueurs[this.aQuiLeTour].pos){
 				if (this.joueurs[this.aQuiLeTour].pos + des > 31){
@@ -51,12 +51,15 @@ class Partie {
 				// que doit il faire : 
 				this.regle(this.joueurs[this.aQuiLeTour]);
 				if (this.joueurs[this.aQuiLeTour].pos == 31 ){
-					/*
+					
 					const index = this.joueurs.indexOf(this.joueurs[this.aQuiLeTour]);
 					if (index > -1) {
-					  this.joueurs.splice(index, 1);
+					    this.joueurs.splice(index, 1);
+					    console.log(this.joueurs);
+						NB_JOUEUR -= 1 ;
+						qqnFini = true;
 					}
-					*/
+					
 
 				}
 			}
@@ -64,10 +67,12 @@ class Partie {
 			this.joueurs[this.aQuiLeTour].tourPasse = false;
 			Page.ecrire(this.joueurs[this.aQuiLeTour].name + " passe son tour");
 		}
-		
 		this.cpt++;
-		this.aQuiLeTour = this.cpt%NB_JOUEUR;
-		
+		if (! qqnFini ){
+			this.aQuiLeTour = this.cpt%NB_JOUEUR;
+		} else {
+			this.aQuiLeTour = this.cpt%(NB_JOUEUR+1);
+		}
 		
 	}
 	
