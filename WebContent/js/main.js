@@ -15,6 +15,6 @@ let COLOR = [
 	"#582900"];
 
 console.log("main");
-let COMPTEUR = 0 ;
-let TRICHEDES = [14,13,12];
+/*let COMPTEUR = 0 ;
+let TRICHEDES = [23,13,12,5,4,3,6,1,2,4,3,1];*/
 let page = new Page(3);

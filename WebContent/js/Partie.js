@@ -31,6 +31,7 @@ class Partie {
 	this.nbJ12 = 0 ;
 	this.STOP = false;
 	this.r12 = false;
+	this.r22 = false;
 	
 	
   }
@@ -78,8 +79,11 @@ class Partie {
 		
 	}
 	recupDiceValue(numJoueur, dice){
-		
-		this.regleSuite(this.joueurs[numJoueur], dice);
+		if (this.r22){
+			this.regleSuite22(this.joueurs[numJoueur],dice);
+		} else {
+			this.regleSuite(this.joueurs[numJoueur], dice);
+		}
 		/*if (this.nombreRegle12 != 0  ){
 			ACTION_NEEDED = false;
 			this.regleSuite12();
@@ -482,6 +486,7 @@ class Partie {
 		this.regle11(joueur);
 	}
 	regle22(joueur){
+		this.r22 = true;
 		Page.ecrire("C'est chaud pour vous..");
 		this.STOP = true ; 
 		Page.creerFakeDice(joueur);
@@ -490,7 +495,7 @@ class Partie {
 	}
 	regleSuite22(joueur, dice){
 		
-		if (this.nombre < NB_JOUEUR ){
+		//if (this.nombre < NB_JOUEUR ){
 			if (dice == 6){
 				Page.ecrire("Aie aie aie, retour à la case départ pour " + this.joueurs[this.nombre].name );
 				this.joueurs[this.nombre].bouge(-1 * this.joueurs[this.nombre].pos);
@@ -500,15 +505,23 @@ class Partie {
 			if (this.nombre < NB_JOUEUR ){
 				Page.creerFakeDice(joueur);
 				Page.ecrire(this.joueurs[this.nombre].name + " : Lance le dé");
+			} else {
+				this.nombre = 0 ;
+				this.STOP = false ;
+				this.r22 = false
+				if (this.r12){
+					this.regle12(joueur);
+				}
 			}
-			
+			/*
 		} else {
 			this.nombre = 0 ;
 			this.STOP = false ;
+			this.r22 = false
 			if (this.r12){
 				this.regle12(joueur);
 			}
-		}
+		}*/
 		
 	}
 	regle23(joueur){

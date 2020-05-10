@@ -106,16 +106,15 @@ img {
 	align-content: flex-end;
 	
 }
-
 .cercle1 {
-
  	 border-radius:50%;
- 	 background:#000000;
+ 	 background:#582900;
  	 width:21%;
   	 height:18%;
  	 border:1px solid #000000;
  	 visibility: hidden;
 }
+
 .cercle2 {
  	 border-radius:50%;
  	 background:#0000ff;
@@ -200,11 +199,12 @@ img {
  	 visibility: hidden;
 }
 .cercle12 {
+
  	 border-radius:50%;
- 	 background:#582900;
+ 	 background:#000000;
  	 width:21%;
   	 height:18%;
- 	 border:1px solid #000000;
+ 	 border:1px solid #fff;
  	 visibility: hidden;
 }
 

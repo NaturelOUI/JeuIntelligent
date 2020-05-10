@@ -16,11 +16,11 @@ class Page {
 	lancerDes(){
 		let alea = Math.floor(Math.random() * 6) +1 ;
 		//let alea = Math.floor(Math.random() * 30) +1 ;
-		//let alea = 20;
+		//let alea = 22;
 		
 		/*let alea = TRICHEDES[COMPTEUR];
-		COMPTEUR++;
-		//console.log(alea);*/
+		COMPTEUR++;*/
+		//console.log(alea);
 		Page.effacerText();
 		document.getElementById("des").textContent = alea;	
 		if (PARTIESTARTED){
@@ -37,6 +37,7 @@ class Page {
 		let btDe = document.getElementById("btDes");
 		btDe.setAttribute("onclick","page.lancerDes()");
 		let alea = Math.floor(Math.random() * 6) +1 ;
+		//let alea = 6 ;
 		document.getElementById("des").textContent = alea;
 		this.partie.recupDiceValue(numJoueur, alea);
 			
