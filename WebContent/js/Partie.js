@@ -15,7 +15,7 @@ class Partie {
   constructor(NB_JOUEUR) {
     
 	console.log(NB_JOUEUR);
-	this.cpt = 0 ;
+	//this.cpt = 0 ;
 	this.aQuiLeTour = 0 ; 
 	this.joueurs = [];
 	for (let i = 0 ; i<NB_JOUEUR ; i++) {
@@ -67,11 +67,16 @@ class Partie {
 			this.joueurs[this.aQuiLeTour].tourPasse = false;
 			Page.ecrire(this.joueurs[this.aQuiLeTour].name + " passe son tour");
 		}
-		this.cpt++;
+		//this.cpt++;
+		
 		if (! qqnFini ){
-			this.aQuiLeTour = this.cpt%NB_JOUEUR;
-		} else {
-			this.aQuiLeTour = this.cpt%(NB_JOUEUR+1);
+			this.aQuiLeTour++;
+			this.aQuiLeTour = this.aQuiLeTour%NB_JOUEUR;
+		} else if (this.aQuiLeTour === NB_JOUEUR)  {
+			this.aQuiLeTour = 0 ;
+		} else{
+			//If it's not the last player who finished, 
+			//the index of the next player is the same of the one who finished because this player is remove of the list
 		}
 		
 	}

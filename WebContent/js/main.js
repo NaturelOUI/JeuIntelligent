@@ -16,5 +16,5 @@ let COLOR = [
 
 console.log("main");
 //let COMPTEUR = 0 ;
-//let TRICHEDES = [8,19,31,5,4,3,6,1,2,4,3,1,1,2,4,1,2,3,1,4,2,3,1,5,2,1,3,4];
+//let TRICHEDES = [17,21,24,17,14,13,6,1,2,4,3,1,1,2,4,1,2,3,1,4,2,3,1,5,2,1,3,4];
 let page = new Page(3);
